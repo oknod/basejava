@@ -34,8 +34,8 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return list.toArray(new Resume[0]);
+    public List<Resume> getAll() {
+        return new ArrayList<>(list);
     }
 
     @Override
@@ -45,9 +45,9 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected Integer getSearchKey(String uuid) {
-        for (Resume r : list) {
-            if (r.getUuid().equals(uuid)) {
-                return list.indexOf(r);
+        for (int i = 0; i < list.size(); i++) {
+            if (uuid.equals(list.get(i).getUuid())) {
+                return i;
             }
         }
         return null;
